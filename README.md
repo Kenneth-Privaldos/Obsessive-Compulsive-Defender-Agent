@@ -127,11 +127,10 @@ The multi-agent structure keeps each component focused, and made the entire syst
 
 There are several features I plan to explore next:
 
-- A calming, simple web interface
-- Encrypted local storage for logged thoughts
+- A simple web interface with a calming visual design
+- Encrypted local storage for saved logs
 - Weekly email or PDF summaries
-- More advanced analytics and charts for recurring themes
-- Automatic anonymization checks before exporting
-- Personalized grounding suggestions based on a user’s most common thought themes
-- Optional clinician export mode with privacy filters
-
+- A more advanced analytics view, maybe even with charts
+- Automatic anonymization checks before export
+- Personalized grounding suggestions based on the user’s common thought themes
+- Optional connection to clinician dashboards (still fully user-controlled)
