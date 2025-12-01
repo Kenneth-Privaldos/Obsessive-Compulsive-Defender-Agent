@@ -1,131 +1,161 @@
-# 🧠 OCD Thought Support Agent
+# 🧠 **OCD Defender**
 
-*A multi-agent system built using the Google Agent Development Kit (ADK) to gently support users experiencing intrusive thoughts through grounding techniques, consent-based logging, and structured insights.*
+### *A safe space for intrusive thoughts*
+
+A multi-agent system built with Google ADK to help users reflect on intrusive thoughts with grounding, consent-based logging, and structured insights.
 
 ---
 
-## 🌍 Competition Track
+## 🌍 **Competition Track**
 
 This project is submitted under the **Agents for Good** track.
-The goal is to support mental well-being in a safe, ethical, and non-clinical way.
+It aims to support mental well-being in a safe, ethical, and non-clinical way.
 
 ---
 
-## 🌱 Problem Statement
+## 🌱 **Problem Statement**
 
-Intrusive thoughts and compulsive urges are far more common than people realize, but for individuals struggling with OCD, these thoughts can feel overwhelming, repetitive, and mentally exhausting. Many people don’t feel comfortable expressing these thoughts openly. Others simply don’t have a reliable way to notice patterns, understand triggers, or communicate what’s happening to their therapist.
+Intrusive thoughts and compulsive urges are far more common than many people realize. But for individuals struggling with OCD, these thoughts can feel overwhelming and mentally exhausting. Many people don’t feel comfortable expressing these thoughts openly. Others simply don’t have a structured way to notice patterns, understand triggers, or communicate what they experience to a therapist.
 
-I wanted to build a small, supportive space where users can express their intrusive thoughts safely and receive grounding support. At the same time, I wanted to give them the option to track and organize these thoughts over time. The goal isn’t to treat or diagnose anything. The goal is to offer clarity, structure, and a gentle conversation partner that doesn’t judge or shame.
+I wanted to create a small, supportive space where users can express intrusive thoughts safely, receive grounding techniques, and optionally track these thoughts over time. The goal is not to diagnose or treat anything. It is to offer clarity, structure, and a gentle conversation partner that doesn’t judge or shame.
 
-This project is personal to me. I experienced religious OCD when I was younger, and I know how confusing intrusive thoughts can feel. Having a tool like this back then would have helped me understand what was happening instead of feeling controlled by it.
-
----
-
-## 🤖 Why Agents?
-
-I learned quickly that a single model cannot gracefully balance empathy, structure, safety, and classification. Language understanding is one skill. Emotion handling is another. JSON classification is different. Summarizing patterns over time requires yet another cognitive skill.
-
-Agents let me break these responsibilities into separate, specialized roles.
-Each agent focuses on exactly one job. ADK’s orchestration handles the routing, which keeps everything predictable, testable, and safe.
-
-This approach also means the conversation stays warm and human-like, while the classification and logging stay precise and structured.
+This project is personally meaningful to me. I experienced religious OCD when I was younger, and I know firsthand how confusing and frightening intrusive thoughts can be. I built something I wish I had back then.
 
 ---
 
-## 🧩 What I Created — Overall Architecture
+## 🤖 **Why Agents?**
 
-The system uses the Google Agent Development Kit (ADK), built in ADK Web.
-The Conversation Agent is the “human-facing” agent, and it automatically calls specialized sub-agents or tools depending on the user’s needs.
+While designing the system, it became clear that a single model cannot handle the different cognitive tasks required here.
+Understanding emotions, extracting structured metadata, providing grounding exercises, and generating meaningful summaries are all **different skills**.
 
-Here is the actual agent graph:
+Agents allow these tasks to be divided logically:
+
+• The **Conversation Agent** focuses on empathy and safety.
+• The **Classifier Agent** specializes in JSON-structured interpretation.
+• The **Logger Tool** ensures nothing is logged without consent.
+• The **Summarizer Agent** provides meaningful insights.
+
+Because each agent does only one job, the system becomes:
+
+• easier to debug
+• easier to test
+• much safer
+• predictable and structured
+• and better aligned with ADK’s strengths
+
+---
+
+## 🧩 **Architecture**
+
+The entire system is created using the **Google Agent Development Kit (ADK)** and orchestrated through **ADK Web**.
+The Conversation Agent sits at the center and decides which specialized agent or tool to call based on the user’s message.
+
+Here is the visual agent graph generated directly in ADK Web:
 
 ![](https://www.googleapis.com/download/storage/v1/b/kaggle-user-content/o/inbox%2F7148592%2F4e2d197fa0768688fe4f66f6b85197b2%2FAgent%20Architecture.png?generation=1764601289198221\&alt=media)
 
 ### Conversation Agent
 
-This is the agent users interact with directly.
-Its job is to respond in a warm, supportive, non-clinical manner. It offers grounding, acknowledges distress without over-reassurance, and never attempts therapy or diagnosis.
-
-Whenever the user mentions an intrusive thought, this agent calls the Classification Agent.
-If the user wants insights, it calls the Summarizer Agent.
-If the user gives explicit consent, it safely triggers the Logger Tool.
+Handles all user interaction.
+It stays warm, supportive, and non-clinical. It offers grounding, acknowledges distress, and never attempts therapy. When the user expresses an intrusive thought, it calls the Classification Agent. When the user wants insights, it calls the Summarizer Agent. With explicit consent, it triggers the Logger Tool.
 
 ### Classification Agent
 
-This agent performs the structured reasoning.
-It takes the raw user message and returns a single JSON object containing:
-
-- theme
-- emotion
-- intensity
-- anonymized note
-- whether logging is recommended
-- a short reply for the Conversation Agent
-
-The JSON is for internal use only. Users never see it directly.
+Takes a raw user message and returns **exactly one JSON object** with theme, emotion, intensity, anonymized note, and recommended logging behavior. This JSON is used internally and never shown directly to the user.
 
 ### Logger Tool
 
-The Logger Tool handles storing intrusive-thought metadata, but only after the user explicitly says yes.
-Nothing is ever logged automatically.
-Everything is anonymized and kept short.
-
-The easiest way to think of it is a consent-based thought journal with structure and safety built in.
+Stores the classified intrusive-thought data, but only after explicit consent.
+Entries are always anonymized and limited to short summaries.
 
 ### Summarizer Agent
 
-This agent analyzes saved entries and generates insights.
-It helps users identify recurring themes, observe emotional changes, and understand patterns over time.
-
-If the user chooses to share the summary with a licensed professional, it can improve communication — but the agent itself never provides clinical analysis.
+Helps users reflect on logged thoughts by identifying trends, repeated themes, and changes in intensity over time.
 
 ---
 
-## 🎥 Demo
+## 🚀 **Setup & Installation**
 
-A typical interaction might look like this:
+### Clone the repository
 
-**User**
+```
+git clone https://github.com/YOUR_USERNAME/ocd-defender.git
+cd ocd-defender
+```
+
+### Create a virtual environment
+
+```
+python -m venv .venv
+source .venv/bin/activate    # macOS/Linux
+.\.venv\Scripts\activate     # Windows
+```
+
+### Install dependencies
+
+```
+pip install --upgrade pip
+pip install google-adk
+```
+
+### Create your `.env` file
+
+This file stores your Gemini API key.
+Do **not** commit this file.
+
+```
+GOOGLE_API_KEY=your_api_key_here
+MODEL_NAME=gemini-2.5-flash
+```
+
+### Running the Agent
+
+```
+python -m app.agent
+```
+
+This launches the conversational interface in your terminal.
+
+---
+
+## 🎥 **Demo Interaction**
+
+User
 “I feel like if I don’t tap the doorknob seven times something terrible will happen.”
 
-**Conversation Agent**
+Agent
 “That sounds like a very stressful intrusive thought to experience. Would you like me to track this thought so you can understand its pattern better? (yes or no)”
 
-If the user says yes, the Logger Tool stages and saves the entry.
-If the user says no, the system respects the decision and continues the conversation normally.
+If the user says yes, the system stages and logs the entry.
+If the user declines, the system simply continues the conversation.
 
-Users may later ask:
-- “show entries”
-- “summarize my thoughts”
-- “give me a grounding technique”
+Users can also say:
+
+- show entries
+- summarize my thoughts
+- give me a grounding technique
 
 ---
 
-## 🛠 The Build
+## 🛠 **The Build**
 
-This project uses the Google Agent Development Kit (ADK), which made it easy to create a safe multi-agent architecture. ADK Web gives me a clear visual graph and lets my Conversation Agent call other components as needed.
+This project uses:
 
-The system includes:
-
-- ADK Web for agent chaining and visualization
+- Google ADK Web for agent chaining and orchestration
 - Gemini models for conversation, classification, and summarization
-- A custom Logger Tool that stores entries with explicit user consent
-- A strict JSON schema so classification stays predictable
-- A session-based consent system to protect user data
+- A custom Logger Tool with explicit user consent
+- A strict JSON schema for reliable classification
+- A session-based consent system
+- VS Code and GitHub for development
+- ChatGPT and Gemini for brainstorming and debugging
 
-Other tools I used:
-
-- Visual Studio Code
-- GitHub
-- ChatGPT and Gemini for brainstorming, debugging, and polishing ideas
-
-The multi-agent structure keeps each component focused, and made the entire system easier to build and maintain.
+The multi-agent structure gives each component one clear responsibility, which made the system easier to build, maintain, and validate for safety.
 
 ---
 
-## 🌟 If I Had More Time
+## 🌟 **If I Had More Time**
 
-There are several features I plan to explore next:
+There are several enhancements I plan to explore next:
 
 - A simple web interface with a calming visual design
 - Encrypted local storage for saved logs
@@ -134,3 +164,12 @@ There are several features I plan to explore next:
 - Automatic anonymization checks before export
 - Personalized grounding suggestions based on the user’s common thought themes
 - Optional connection to clinician dashboards (still fully user-controlled)
+
+---
+
+## 🔒 **Safety Statement**
+
+This system is not a therapist and does not diagnose, treat, or replace any professional mental-health service.
+It exists solely to provide supportive grounding and optional structured journaling, always with explicit user consent.
+
+---
