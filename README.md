@@ -55,12 +55,12 @@ If the user gives explicit consent, it safely triggers the Logger Tool.
 This agent performs the structured reasoning.
 It takes the raw user message and returns a single JSON object containing:
 
-• theme
-• emotion
-• intensity
-• anonymized note
-• whether logging is recommended
-• a short reply for the Conversation Agent
+- theme
+- emotion
+- intensity
+- anonymized note
+- whether logging is recommended
+- a short reply for the Conversation Agent
 
 The JSON is for internal use only. Users never see it directly.
 
@@ -95,9 +95,9 @@ If the user says yes, the Logger Tool stages and saves the entry.
 If the user says no, the system respects the decision and continues the conversation normally.
 
 Users may later ask:
-• “show entries”
-• “summarize my thoughts”
-• “give me a grounding technique”
+- “show entries”
+- “summarize my thoughts”
+- “give me a grounding technique”
 
 ---
 
@@ -107,17 +107,17 @@ This project uses the Google Agent Development Kit (ADK), which made it easy to 
 
 The system includes:
 
-• ADK Web for agent chaining and visualization
-• Gemini models for conversation, classification, and summarization
-• A custom Logger Tool that stores entries with explicit user consent
-• A strict JSON schema so classification stays predictable
-• A session-based consent system to protect user data
+- ADK Web for agent chaining and visualization
+- Gemini models for conversation, classification, and summarization
+- A custom Logger Tool that stores entries with explicit user consent
+- A strict JSON schema so classification stays predictable
+- A session-based consent system to protect user data
 
 Other tools I used:
 
-• Visual Studio Code
-• GitHub
-• ChatGPT and Gemini for brainstorming, debugging, and polishing ideas
+- Visual Studio Code
+- GitHub
+- ChatGPT and Gemini for brainstorming, debugging, and polishing ideas
 
 The multi-agent structure keeps each component focused, and made the entire system easier to build and maintain.
 
@@ -127,11 +127,11 @@ The multi-agent structure keeps each component focused, and made the entire syst
 
 There are several features I plan to explore next:
 
-• A calming, simple web interface
-• Encrypted local storage for logged thoughts
-• Weekly email or PDF summaries
-• More advanced analytics and charts for recurring themes
-• Automatic anonymization checks before exporting
-• Personalized grounding suggestions based on a user’s most common thought themes
-• Optional clinician export mode with privacy filters
+- A calming, simple web interface
+- Encrypted local storage for logged thoughts
+- Weekly email or PDF summaries
+- More advanced analytics and charts for recurring themes
+- Automatic anonymization checks before exporting
+- Personalized grounding suggestions based on a user’s most common thought themes
+- Optional clinician export mode with privacy filters
 
