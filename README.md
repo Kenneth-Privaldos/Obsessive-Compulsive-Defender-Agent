@@ -1,4 +1,4 @@
-# 🧠 **OCD Defender**
+# 🧠 **Obsessive Compulsive Defender (OCD Agent)**
 
 ### *A safe space for intrusive thoughts*
 
