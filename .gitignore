@@ -1,0 +1,23 @@
+# environment files
+.env
+*.env
+
+# ignore env inside app/
+app/.env
+
+# Python virtual environments
+venv/
+.venv/
+*/venv/
+*/.venv/
+.venv
+
+# Python cache
+__pycache__/
+*.pyc
+
+# system files
+.DS_Store
+.DS_Store/
+.vscode/settings.json
+ocd-defender-agent/app/.adk/eval_history/app_Tests_1764567445.7233632.evalset_result.json
