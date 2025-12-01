@@ -111,10 +111,10 @@ MODEL_NAME=gemini-2.5-flash
 ### Running the Agent
 
 ```
-python -m app.agent
+adk web
 ```
 
-This launches the conversational interface in your terminal.
+This command launches the Google ADK Web interface in your browser. From there, you can interact with your Conversation Agent, test messages, view the agent graph, and observe how your multi-agent system routes calls between the Classification Agent, Summarizer Agent, and Logger Tool.
 
 ---
 
